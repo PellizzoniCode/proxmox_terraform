@@ -47,7 +47,7 @@ resource "proxmox_virtual_environment_vm" "control_planes" {
     }
     ip_config {
       ipv4 {
-        address = "${cidrhost(var.bridge_cidr_range, var.master_network_range + count.index)}/24"
+        address = "${cidrhost(var.bridge_cidr_range, var.control_plane_network_range + count.index)}/24"
         gateway = cidrhost(var.bridge_cidr_range, 1)
       }
     }
