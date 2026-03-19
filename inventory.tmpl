@@ -1,19 +1,19 @@
 [all]
-%{ for index in master.index ~}
-${ master.vm_name[index] } ansible_host=${ master.ip_address[index] } ansible_user=${ master.user[index] } ansible_python_interpreter=/usr/bin/python3 etcd_member_name=etcd${index + 1}
+%{ for index in control_plane.index ~}
+${ control_plane.vm_name[index] } ansible_host=${ control_plane.ip_address[index] } ansible_user=${ control_plane.user[index] } ansible_python_interpreter=/usr/bin/python3 etcd_member_name=etcd${index + 1}
 %{ endfor ~}
 %{ for index in worker.index ~}
 ${ worker.vm_name[index] } ansible_host=${ worker.ip_address[index] } ansible_user=${ worker.user[index] } ansible_python_interpreter=/usr/bin/python3
 %{ endfor ~}
 
 [kube_control_plane]
-%{ for index in master.index ~}
-${ master.vm_name[index] }
+%{ for index in control_plane.index ~}
+${ control_plane.vm_name[index] }
 %{ endfor ~}
 
 [etcd]
-%{ for index in master.index ~}
-${ master.vm_name[index] }
+%{ for index in control_plane.index ~}
+${ control_plane.vm_name[index] }
 %{ endfor ~}
 
 [kube_node]
