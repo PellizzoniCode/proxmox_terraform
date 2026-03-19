@@ -26,7 +26,6 @@ resource "proxmox_virtual_environment_vm" "control_planes" {
     dedicated = var.control_plane_memory
   }
 
-  # FIX: When cloning, do NOT declare a disk block for scsi0.
   # The clone already has the disk attached. Declaring it here causes
   # the provider to conflict with the cloned disk, potentially breaking
   # the boot configuration. Disk resizing should be done via the clone
