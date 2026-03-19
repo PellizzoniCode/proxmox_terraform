@@ -34,3 +34,4 @@ override.tf.json
 # Include override files as they are generally used to override resources locally
 !override.tf
 !override.tf.json
+*.ini
