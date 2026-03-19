@@ -46,8 +46,8 @@ variable "control_plane_nr" {
 }
 
 variable "control_plane_id_range" {
-  type    = string
-  default = "400" #Update with the range of IDs for control plane nodes this will generate something like 400, 401, 402 for 3 control plane nodes. Make sure this range does not overlap with any existing VMIDs in your Proxmox cluster.
+  type    = number
+  default = 400 #Update with the range of IDs for control plane nodes this will generate something like 400, 401, 402 for 3 control plane nodes. Make sure this range does not overlap with any existing VMIDs in your Proxmox cluster.
 }
 
 variable "control_plane_network_range" {
@@ -87,8 +87,8 @@ variable "worker_nr" {
 }
 
 variable "worker_id_range" {
-  type    = string
-  default = "500" #Update with the range of IDs for worker nodes this will generate something like 500, 501, 502 for 3 worker nodes. Make sure this range does not overlap with any existing VMIDs in your Proxmox cluster.
+  type    = number
+  default = 500 #Update with the range of IDs for worker nodes this will generate something like 500, 501, 502 for 3 worker nodes. Make sure this range does not overlap with any existing VMIDs in your Proxmox cluster.
 }
 
 variable "worker_network_range" {
