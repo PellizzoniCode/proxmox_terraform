@@ -26,16 +26,17 @@ resource "proxmox_virtual_environment_vm" "workers" {
     dedicated = var.worker_memory
   }
 
-  # FIX: Removed the disk block. When cloning, the scsi0 disk is already
-  # present from the template. Declaring it again causes conflicts with
-  # the bpg/proxmox provider that can break the boot disk configuration.
+  disk {
+    datastore_id = "local-lvm"
+    file_format  = "raw"
+    interface    = "scsi0"
+    size         = var.worker_disksize
+  }
 
   network_device {
     bridge = var.bridge_network
     model  = "virtio"
-    # FIX: Removed firewall = true. The Proxmox firewall default inbound
-    # policy is DROP. With no rules defined to allow port 22, enabling
-    # the firewall here blocks ALL inbound traffic including SSH.
+    # firewall is omitted (defaults to false) -- no Proxmox firewall on this NIC
   }
 
   initialization {

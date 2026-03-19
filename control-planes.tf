@@ -26,10 +26,12 @@ resource "proxmox_virtual_environment_vm" "control_planes" {
     dedicated = var.control_plane_memory
   }
 
-  # The clone already has the disk attached. Declaring it here causes
-  # the provider to conflict with the cloned disk, potentially breaking
-  # the boot configuration. Disk resizing should be done via the clone
-  # itself or a separate null_resource/provisioner if needed.
+  disk {
+    datastore_id = "local-lvm"
+    file_format  = "raw"
+    interface    = "scsi0"
+    size         = var.control_plane_disksize
+  }
 
   network_device {
     bridge = var.bridge_network
